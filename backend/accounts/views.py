@@ -102,14 +102,16 @@ from rest_framework_jwt.views import ObtainJSONWebToken, RefreshJSONWebToken
     
 class ObtainJsonWebTokenEmail(ObtainJSONWebToken): # получение токена jwt
     def post(self, request, *args, **kwargs):
-        if 'email' in request.data: # проверяем есть ли почта в запросе
+        if 'username' in request.data: # проверяем есть ли почта в запросе
             try: # пытаемся найти запись в БД с такой почтой 
-                user = User.objects.get(email = request.data['email'])
+                user = User.objects.get(email = request.data['username'])
             except User.DoesNotExist: # если не нашли
                 user = None
 
+        print(user)
+        print(request.user)
         if user: # если нашли
-            del request.data['email'] # удаляем почту из запроса 
+            del request.data['username'] 
             request.data['username'] = user.username # добавляем данные пользователя в запрос
         return super().post(request, *args, **kwargs) # передаём новые данные родителю класса
 

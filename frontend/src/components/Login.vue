@@ -21,20 +21,18 @@ export default{
             console.log(1)
             axios({
                 url:"http://127.0.0.1:8000/auth/token/",
-                method:"POST",
-                responseType:'json',
+                method:"post",
+                // responseType:'json',
                 data:{
                     username: this.login,
                     password: this.password
                 }
-            }).then(function(response){
+            }).then(response => {
                 console.log(response)
-            }).catch(function(error){
-                console.log(error)
             })
+            }
         }
     }
-}
 </script>
 
 <style lang="">

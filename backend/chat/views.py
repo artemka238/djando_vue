@@ -33,12 +33,15 @@ class DialogAPI(APIView):
     
     def post(self,request):
         # data - параметр для всех данных
+        print(request.data)
         dialog = ChatPostSerializer(data = request.data)
+        # print(dialog.errors)
         if dialog.is_valid():
             # save - сохранение записи
             dialog.save(user = request.user)
             return Response(status = 201)
         else:
+            print(dialog.errors)
             return Response(status = 400)
         
 

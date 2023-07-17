@@ -6,6 +6,7 @@ import Room from "@/components/chat/Room"
 import Dialog from "@/components/chat/Dialog"
 import AddUser from "@/components/chat/AddUser"
 import Home from "@/components/Home"
+import Main from "@/components/mainHome"
 import { createRouter, createWebHistory } from "vue-router"
 
 const routes = [
@@ -45,6 +46,11 @@ const routes = [
         path: '/home',
         name:"home",
         component: Home
+    },
+    {
+        path:"/main",
+        name:"main",
+        component: Main
     },
 ]
 

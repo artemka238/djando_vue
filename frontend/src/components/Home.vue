@@ -1,126 +1,44 @@
 <template>
     <div>
+        <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-4">Simple header</span>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+      </ul>
+    </header>
+  </div>
         <div>
-            <button v-if="!auth">
+            <button v-if="!auth" @click="LogIn">
                 LogIn
             </button>
-            <button v-else>
+            <button v-else @click="LogOut">
                 LogOut
             </button>
         </div>
-        
-
 
         <div class="container">
     <div class="row">
         <div class="col-12 my-3">
-            <h1>Bootstrap 5 chat app</h1>
+            <h1>Messages</h1>
             <hr>
-            Support my work @ MMLTech | <a href="https://ko-fi.com/mmltech" target="_blank"><i class="fas fa-coffee"></i> Buy me a coffee</a> | <a href="https://streamcd.net">StreamCD</a> | <a href="https://obscountdown.com">OBSCountdown</a> | <a href="https://avatarplaceholder.com">AvatarPlaceholder</a>
             <hr>
         </div>
     </div>
     <div id="ChatBox">
         <div class="row">
             <div class="col-md-4">
-                <div class="sidebar h-100">
-                    <form>
-                        <div class="form-group">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-                                <input type="text" class="form-control" placeholder="Search user" aria-label="Search user" aria-describedby="basic-addon1">
-                            </div>
-                        </div>
-                    </form>
-                    <hr>
-                    <ul class="users-list">
-                        <li class="user-profile d-flex align-items-center">
-                            <div class="user-avatar me-3">
-                                <img src="https://plhold.com/avatar/60?text=john+doe" alt="" />
-                            </div>
-                            <div class="d-flex flex-column">
-                                <strong class="user-name">John Doe</strong>
-                                <span class="status">
-                                <i class="fas fa-circle text-success"></i>
-                                Online
-                            </span>
-                            </div>
-                        </li>
-                        <li class="user-profile d-flex align-items-center active">
-                            <div class="user-avatar me-3">
-                                <img src="https://plhold.com/avatar/60?text=Angelien+Austėja+Rakes" alt="" />
-                            </div>
-                            <div class="d-flex flex-column">
-                                <strong class="user-name">Angelien Austėja Rakes</strong>
-                                <span class="status">
-                                <i class="fas fa-circle text-danger"></i>
-                                Last seen 1 day ago
-                            </span>
-                            </div>
-                        </li>
-                        <li class="user-profile d-flex align-items-center">
-                            <div class="user-avatar me-3">
-                                <img src="https://plhold.com/avatar/60?text=Temuri+Naja+Rigby" alt="" />
-                            </div>
-                            <div class="d-flex flex-column">
-                                <strong class="user-name">Temuri Naja Rigby</strong>
-                                <span class="status">
-                                <i class="fas fa-circle text-warning"></i>
-                                Away
-                            </span>
-                            </div>
-                        </li>
-                        <li class="user-profile d-flex align-items-center">
-                            <div class="user-avatar me-3">
-                                <img src="https://plhold.com/avatar/60?text=Izem+Estela+McAfee" alt="" />
-                            </div>
-                            <div class="d-flex flex-column">
-                                <strong class="user-name">Izem Estela McAfee</strong>
-                                <span class="status">
-                                <i class="fas fa-circle text-info"></i>
-                                Do Not Disturb
-                            </span>
-                            </div>
-                        </li>
-                        <li class="user-profile d-flex align-items-center">
-                            <div class="user-avatar me-3">
-                                <img src="https://plhold.com/avatar/60?text=Luz+Ruža+Whittle" alt="" />
-                            </div>
-                            <div class="d-flex flex-column">
-                                <strong class="user-name">Luz Ruža Whittle</strong>
-                                <span class="status">
-                                <i class="fas fa-circle text-success"></i>
-                                Online
-                            </span>
-                            </div>
-                        </li>
-                        <li class="user-profile d-flex align-items-center">
-                            <div class="user-avatar me-3">
-                                <img src="https://plhold.com/avatar/60?text=Govinda+Coriander+Ármannsson" alt="" />
-                            </div>
-                            <div class="d-flex flex-column">
-                                <strong class="user-name">Govinda Coriander Ármannsson</strong>
-                                <span class="status">
-                                <i class="fas fa-circle text-success"></i>
-                                Online
-                            </span>
-                            </div>
-                        </li>
-                        <li class="user-profile d-flex align-items-center">
-                            <div class="user-avatar me-3">
-                                <img src="https://plhold.com/avatar/60?text=Shikha+Dionisia+Sarkissian" alt="" />
-                            </div>
-                            <div class="d-flex flex-column">
-                                <strong class="user-name">Shikha Dionisia Sarkissian</strong>
-                                <span class="status">
-                                <i class="fas fa-circle text-success"></i>
-                                Online
-                            </span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                <Room @open_dialog="open_dialog"></Room>
             </div>
+            
             <div class="col-md-8">
                 <div class="chat-frame d-flex flex-column justify-content-between">
                     <div class="action-frame d-flex align-items-center">
@@ -150,47 +68,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="message-history py-3">
-                        <div class="message-line d-flex flex-column">
-                            <div class="d-flex justify-content-end mb-3">
-                                <div class="user-avatar">
-                                    <img src="https://plhold.com/avatar/60?text=Angelien+Austėja+Rakes" alt="" />
-                                </div>
-                            </div>
-                            <p class="message ms-auto">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                <small class="date d-flex justify-content-start mt-3">11 Nov 2022 13:00</small>
-                            </p>
-                        </div>
-                        <div class="message-line reply d-flex flex-column">
-                            <div class="d-flex align-items-end mb-3">
-                                <div class="user-avatar">
-                                    <img src="https://plhold.com/avatar/60?text=Shikha+Dionisia+Sarkissian" alt="" />
-                                </div>
-                            </div>
-                            <p class="message">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                <small class="date d-flex justify-content-end mt-3">11 Nov 2022 13:00</small>
-                            </p>
-                        </div>
-                        <div class="message-line reply d-flex flex-column">
-                            <div class="d-flex align-items-end mb-3">
-                                <div class="user-avatar">
-                                    <img src="https://plhold.com/avatar/60?text=Shikha+Dionisia+Sarkissian" alt="" />
-                                </div>
-                            </div>
-                            <p class="message">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                <small class="date d-flex justify-content-end mt-3">11 Nov 2022 13:00</small>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="inputs mt-auto">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Your message" aria-label="Your message" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fas fa-paper-plane"></i></button>
-                        </div>
-                    </div>
+                    <Dialog v-if="dialog.show" :id="dialog.id"></Dialog>
                 </div>
             </div>
         </div>
@@ -200,8 +78,57 @@
 </template>
 
 <script>
+import Room from './chat/Room.vue';
+import Dialog from './chat/Dialog.vue';
+
 export default {
-    
+    components:{
+        Room,
+        Dialog,
+    },
+    data(){
+        return{
+            dialog:{
+                id:"",
+                show:false
+            }
+        }
+    },
+    methods:{
+        open_dialog(id){
+            this.dialog.id = id
+            this.dialog.show = true
+            console.log(id)
+            },
+            CreateRoom(){
+            // axios - функция для запросов к сайтам
+            axios({
+                url:"http://127.0.0.1:8000/chat/room/",
+                method:"post",
+                // responseType:'json',
+            }).then(response => {
+                console.log(response)
+                // this.rooms = response.data.data.data
+                this.LoadRooms()
+            }).catch(error => {
+                console.log(error)
+            })
+            },
+            LogOut(){
+              sessionStorage.removeItem("authtoken")
+              window.location = "login/"
+            },
+            LogIn(){
+              this.$router.push({name:"login"})
+            }
+        },
+    computed:{
+        auth(){
+          if(sessionStorage.getItem("authtoken")){
+            return true
+          }
+        }
+        }
 }
 </script>
 

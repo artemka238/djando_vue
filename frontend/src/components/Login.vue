@@ -86,6 +86,7 @@ export default{
             }).then(response => {
                 console.log(response)
                 sessionStorage.setItem('authtoken',response.data.token)
+                this.$router.push({name:"home"})
             })
             }
         }

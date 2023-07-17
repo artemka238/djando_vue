@@ -1,12 +1,12 @@
 <template>
     <div>
         <div>
-            <select v-model="option">
+            <select class="form-select form-select-sm" aria-label=".form-select-sm пример" v-model="option">
                 <option v-for="user in users" :value = "user.id">
                     {{ user.username }}
                 </option>
             </select>
-            <button @click = "add_user">
+            <button @click = "add_user" class="btn btn-outline-primary">
                 Добавить пользователя
             </button>
         </div>
@@ -16,6 +16,9 @@
 <script>
 import axios from "axios"
 export default {
+    props:{
+        room:""
+    },
     data(){
         return{
             users:"",
@@ -45,7 +48,7 @@ export default {
             url:"http://127.0.0.1:8000/chat/users/",
             method:"post",
             data:{
-                room:1,
+                room:this.id,
                 user:parseInt(this.option)
             }
           }).then(response=>{

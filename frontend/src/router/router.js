@@ -7,7 +7,10 @@ import Dialog from "@/components/chat/Dialog"
 import AddUser from "@/components/chat/AddUser"
 import Home from "@/components/Home"
 import Main from "@/components/mainHome"
+import About from "@/components/about"
+import Contact from "@/components/contact"
 import { createRouter, createWebHistory } from "vue-router"
+import AboutCats from "@/components/chat/cats"
 
 const routes = [
     {
@@ -51,6 +54,21 @@ const routes = [
         path:"/main",
         name:"main",
         component: Main
+    },
+    {
+        path:"/about",
+        name:"about",
+        component: About
+    },
+    {
+        path:"/contact",
+        name:"contact",
+        component:Contact
+    },
+    {
+        path:"/cat",
+        name:"cat",
+        component:AboutCats
     },
 ]
 

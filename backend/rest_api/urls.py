@@ -15,11 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from cats.views import GetCats
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path("api/",include("tasks.urls")),
     path("auth/",include("accounts.urls")),
     path('admin/', admin.site.urls),
+    path('getcat/', GetCats),
     path("v1/",include("api.urls")),
     path("chat/",include("chat.urls")),
+    path("morecats/",include("cats.urls")),
+
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

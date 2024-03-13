@@ -11,6 +11,8 @@ import About from "@/components/about"
 import Contact from "@/components/contact"
 import { createRouter, createWebHistory } from "vue-router"
 import AboutCats from "@/components/chat/cats"
+import CatUser from "@/components/chat/CatUser"
+import History from "@/components/chat/History"
 
 const routes = [
     {
@@ -69,6 +71,16 @@ const routes = [
         path:"/cat",
         name:"cat",
         component:AboutCats
+    },
+    {
+        path:"/profile",
+        name:"profile",
+        component:CatUser
+    },
+    {
+        path:"/history",
+        name:"history",
+        component:History
     },
 ]
 

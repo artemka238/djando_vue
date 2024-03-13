@@ -8,9 +8,10 @@ class UserSerializers(serializers.ModelSerializer):
         fields = ['id', 'username']
 
 class CatsSerializers(serializers.ModelSerializer):
+    user = UserSerializers(required = False)
     class Meta:
         model = AboutCats
-        fields = ["id",'name', 'breed', 'age', 'image', 'cost']
+        fields = ["id",'name', 'breed', 'age', 'image', 'cost', 'user']
 
 class CatsAPISerializers(serializers.ModelSerializer):
     image_url = serializers.CharField(source = 'image.url',default = '')
@@ -24,3 +25,12 @@ class GetUserInfoSerializers(serializers.ModelSerializer):
     class Meta:
         model = Balance
         fields = ["user", "balance"]
+
+class CatHistorySerializers(serializers.ModelSerializer):
+    buyer = UserSerializers()
+    seller = UserSerializers()
+    cat = CatsSerializers()
+
+    class Meta:
+        model = CatHistory
+        fields = ["buyer", 'seller', "cost", 'cat', 'date']

@@ -29,19 +29,39 @@
         </form>
       </div>
     </div> -->
-    <li class="nav-item">
-                    <p class="nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-</svg> {{ username }}</p>
-                </li>
-                <li class="nav-item">
-                  
-                    <p class="nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bank" viewBox="0 0 16 16">
-  <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"/>
-</svg> {{ balance }}</p>
-                </li>
   </nav>
+
+<div class='container' v-show='visible'>
+  <form>
+  <div class="mb-3 mx-5">
+    <label for="exampleInputEmail1" class="form-label">Cat name</label>
+    <input type="text" v-model='name' class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3 mx-5">
+    <label for="exampleInputPassword1" class="form-label">Breed</label>
+    <input type="text" v-model='breed' class="form-control" id="exampleInputPassword1">
+  </div>
+  <div class="mb-3 form-check mx-5">
+    <label for="exampleInputPassword1" class="form-label"> age from 1 till 20</label>
+    <input type="number" min='0' max='20' v-model="age" class="form-control" id="exampleCheck1">
+  </div>
+  <div class="mb-3 form-check  mx-5">
+    <label for="exampleInputPassword1" class="form-label"> cost</label>
+    <input type="number" min='1' max='100000' v-model='cost' class="form-control" id="exampleCheck1">
+  </div>
+  <div class="mb-3  mx-5">
+  <label for="formFile" class="form-label">Enter cat image</label>
+  <input class="form-control" v-on:change='AddFile()' ref='file' type="file" id="formFile">
+</div>
+  <button type="button" class="btn btn-primary" @click='CreateCat'>Submit</button>
+
+</form>
+</div>
+
+  <button type="button" class="btn btn-primary btn-visible" @click='visible=!visible'>
+  {{visible?'скрыть':'отобразить'}}</button>
+
+
 
 <div class="album py-5 bg-body-tertiary">
   <div class="container">
@@ -59,11 +79,11 @@
             <p>{{ cat.cost }}</p>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
             <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
+              <!-- <div class="btn-group">
                 <button @click = "buycat(cat.id)">
                   Buy
                 </button>
-              </div>
+              </div> -->
               <small class="text-body-secondary">9 mins</small>
             </div>
           </div>
@@ -81,7 +101,7 @@
             <p>{{ cat.cost }}</p>
             <img v-if = 'cat.image' :src = 'cat.image'>
         </div> -->
-                {{ err }}
+                
     </div>
 </template>
 
@@ -93,7 +113,13 @@ export default {
             cats:"",
             err:"",
             balance:"",
-            username:""
+            username:"",
+            name:'',
+            age:'',
+            breed:'',
+            cost:'',
+            image:'',
+            visible:false,
         }
     },
     methods:{
@@ -101,7 +127,7 @@ export default {
             console.log(1)
             // axios - функция для запросов к сайтам
             axios({
-                url:"http://127.0.0.1:8000/morecats/cats_shop/",
+                url:"http://127.0.0.1:8000/morecats/cats/",
                 method:"get",
                 // responseType:'json',
             }).then(response => {
@@ -116,6 +142,36 @@ export default {
                 }
             })
             },
+
+            AddFile(){
+              this.image = this.$refs.file.files[0]
+              // добавояем файл в переменную
+            },
+
+            CreateCat(){
+              const dataform = new FormData()
+              dataform.append('image',this.image)
+              dataform.append('name',this.name)
+              dataform.append('breed',this.breed)
+              dataform.append('age',this.age)
+              dataform.append('cost',this.cost)
+              axios({
+                url:"http://127.0.0.1:8000/morecats/cats/",
+                method:"post",
+                data:dataform
+            }).then(response => {
+              console.log(response)
+              this.LoadRooms()
+
+            }).catch(error => {
+                console.log(error.response)
+                if (error.response.status === 403)
+                {
+                    this.err = "you have not permission, buy 10 cats or leave"
+                }
+            })
+            },
+
             CreateRoom(){
             // axios - функция для запросов к сайтам
             axios({
@@ -184,6 +240,9 @@ export default {
 }
 </script>
 
-<style lang="">
-    
+<style>
+    .btn-visible{
+      margin: 20px;
+
+    }
 </style>

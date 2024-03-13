@@ -1,5 +1,5 @@
 from django.contrib import admin
-from cats.models import AboutCats, CatsForPeople, Balance
+from cats.models import AboutCats, Balance, CatHistory
 
 
 class AboutCatsAdmin(admin.ModelAdmin):
@@ -15,5 +15,5 @@ class CatsForPeopleAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(AboutCats, AboutCatsAdmin)
-admin.site.register(CatsForPeople, CatsForPeopleAdmin)
 admin.site.register(Balance, BalanceAdmin)
+admin.site.register(CatHistory)

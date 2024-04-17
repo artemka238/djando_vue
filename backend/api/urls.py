@@ -13,7 +13,7 @@ router2.register(r"appointment",views.AppointmentAPI)
 
 router3 = DefaultRouter()
 router3.register(r"medical_record",views.MedicalRecordAPI)
-
+# ff
 
 urlpatterns = [
     path("",include(router0.urls)),
